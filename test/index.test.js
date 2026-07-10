@@ -36,6 +36,10 @@ test('renders emoji nested inside emphasis', () => {
   expect(render('**:smile:**')).toBe(`<p><strong>${smile}</strong></p>`);
 });
 
+test('renders shortcodes containing + and -', () => {
+  expect(render(':+1: :-1:')).toBe(`<p>${dict['+1']} ${dict['-1']}</p>`);
+});
+
 test('leaves an unknown shortcode untouched', () => {
   expect(render(':definitely_not_an_emoji_xyz:')).toBe('<p>:definitely_not_an_emoji_xyz:</p>');
 });
