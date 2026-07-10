@@ -6,6 +6,8 @@ Cause I just want emoji shortcodes that I'm used to in my MDs...
 
 `emojis.json` emoji dictionary is generated directly from `https://api.github.com/emojis` and `https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json` using the `npm run generate-dict` script.
 
+Support for legendary :shipit:, :suspect:, :trollface:, :octocat:, :atom: (my good old friend 😢), :electron:, etc... that get rendered into an image.
+
 ## Installation
 
 ```bash
