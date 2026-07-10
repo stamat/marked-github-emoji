@@ -1,6 +1,6 @@
 {
   "name": "marked-github-emoji",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A lightweight, zero-dependency marked extension that renders GitHub emoji shortcodes (:smile:) as native emoji",
   "repository": {
     "type": "git",
