@@ -1,15 +1,28 @@
 {
   "name": "marked-github-emoji",
   "version": "1.0.0",
-  "description": "",
+  "description": "A lightweight, zero-dependency marked extension that renders GitHub emoji shortcodes (:smile:) as native emoji",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stamat/marked-github-emoji.git"
+  },
+  "homepage": "https://github.com/stamat/marked-github-emoji#readme",
+  "bugs": {
+    "url": "https://github.com/stamat/marked-github-emoji/issues"
+  },
   "type": "module",
   "main": "index.js",
+  "types": "index.d.ts",
   "exports": {
-    ".": "./index.js",
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
     "./emojis.json": "./emojis.json"
   },
   "files": [
     "index.js",
+    "index.d.ts",
     "emojis.json"
   ],
   "scripts": {
@@ -17,11 +30,19 @@
     "lint": "eslint .",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "keywords": [],
+  "keywords": [
+    "marked",
+    "marked-extension",
+    "emoji",
+    "github",
+    "shortcode",
+    "gemoji",
+    "markdown"
+  ],
   "author": "Stamat <@stamat> (http://stamat.info)",
   "license": "MIT",
   "peerDependencies": {
-    "marked": "^4.0.0 || ^5.0.0 || ^6.0.0 || ^12.0.0 || ^13.0.0"
+    "marked": ">=4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
