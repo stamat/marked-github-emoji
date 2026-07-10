@@ -1,4 +1,4 @@
-# marked-github-emoji
+# marked-github-emoji [![npm version](https://img.shields.io/npm/v/marked-github-emoji)](https://www.npmjs.com/package/marked-github-emoji)
 
 A lightweight, zero-dependency `marked` extension to parse GitHub-style shortcodes into native system emojis.
 
