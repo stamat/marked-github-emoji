@@ -57,6 +57,20 @@ test('renders a custom image asset as an img with alt/title/class', () => {
   expect(html).toContain('class="gh-emoji"');
 });
 
+test('merges extra emojis on top of the bundled dictionary', () => {
+  const html = render(':smile: :party_cave:', { emojis: { party_cave: '🗿' } });
+  expect(html).toBe(`<p>${smile} 🗿</p>`);
+});
+
+test('emojis option overrides a bundled entry', () => {
+  expect(render(':smile:', { emojis: { smile: '🙃' } })).toBe('<p>🙃</p>');
+});
+
+test('dictionary option replaces the bundled dict entirely', () => {
+  const html = render(':smile: :rock:', { dictionary: { rock: '🗿' } });
+  expect(html).toBe('<p>:smile: 🗿</p>');
+});
+
 test('honors custom className and style options', () => {
   const html = render(`:${urlCode}:`, { className: 'x', style: 'color:red' });
   expect(html).toContain('class="x"');

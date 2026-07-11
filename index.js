@@ -7,6 +7,9 @@ export function markedGithubEmoji(options = {}) {
   // Allow users to easily customize image element classes or styles via options
   const className = options.className || 'gh-emoji';
   const imgStyle = options.style || 'height: 1.25em; vertical-align: text-top;';
+  // `dictionary` replaces the bundled dict entirely; `emojis` adds/overrides
+  // entries on top of it. Values are native emoji strings or image URLs.
+  const emojiMap = { ...(options.dictionary || githubEmojiMap), ...options.emojis };
 
   return {
     extensions: [{
@@ -21,7 +24,7 @@ export function markedGithubEmoji(options = {}) {
         
         if (match) {
           const shortcode = match[1];
-          const value = githubEmojiMap[shortcode];
+          const value = emojiMap[shortcode];
           
           if (value) {
             // Determine if the value is a remote URL or an actual native emoji character
