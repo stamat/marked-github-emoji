@@ -1,18 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Read the generated JSON file synchronously during module initialization.
-// Resolve relative to this module so the bundled dict is found no matter what
-// the consumer's cwd is.
-const dictPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'emojis.json');
-let githubEmojiMap = {};
-
-try {
-  githubEmojiMap = JSON.parse(fs.readFileSync(dictPath, 'utf-8'));
-} catch {
-  console.warn('⚠️ [marked-github-emoji]: Could not load emojis.json. Run "npm run generate-dict" first.');
-}
+// Static import of the generated dict (emojis.js is emitted by
+// "npm run generate-dict" alongside emojis.json). No fs/path/url usage,
+// so the package works in browsers and bundlers as well as Node.
+import githubEmojiMap from './emojis.js';
 
 export function markedGithubEmoji(options = {}) {
   // Allow users to easily customize image element classes or styles via options

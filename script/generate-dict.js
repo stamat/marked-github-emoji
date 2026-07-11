@@ -7,6 +7,9 @@ const API_URL = 'https://api.github.com/emojis';
 // reconstruct ZWJ sequences (👩‍❤️‍💋‍👨) or tell flags apart from the URL alone.
 const GEMOJI_URL = 'https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json';
 const OUTPUT_PATH = path.join(process.cwd(), 'emojis.json');
+// ESM module wrapper so index.js can statically import the dict — keeps the
+// package free of fs/path at runtime and therefore browser-compatible.
+const MODULE_OUTPUT_PATH = path.join(process.cwd(), 'emojis.js');
 
 // Fallback for GitHub emoji not yet in gemoji. Lossy: no ZWJ/fe0f, breaks
 // ZWJ sequences. gemoji is preferred whenever it has the shortcode.
@@ -62,8 +65,10 @@ async function generateDict() {
     }
 
     // Write out the clean dictionary file
-    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(processedEmojis, null, 2), 'utf-8');
-    console.log(`✅ Dictionary successfully compiled! Saved to: ${OUTPUT_PATH}`);
+    const json = JSON.stringify(processedEmojis, null, 2);
+    fs.writeFileSync(OUTPUT_PATH, json, 'utf-8');
+    fs.writeFileSync(MODULE_OUTPUT_PATH, `export default ${json};\n`, 'utf-8');
+    console.log(`✅ Dictionary successfully compiled! Saved to: ${OUTPUT_PATH} and ${MODULE_OUTPUT_PATH}`);
   } catch (error) {
     console.error('❌ Build script encountered an error:', error.message);
     process.exit(1);
